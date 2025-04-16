@@ -1,0 +1,55 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/back"
+            android:textColor="#535159"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_arrow_back_24" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:layout_weight="1"
+            android:backgroundTint="@color/gray"
+            android:drawableStart="@drawable/ic_search_24"
+            android:hint="@string/timKiem"
+            android:inputType="textFilter"
+            android:textSize="15sp"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:id="@+id/btnViewCart"
+            android:contentDescription="@string/nutGioHang"
+            android:src="@drawable/ic_shopping_cart_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="7dp" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:contentDescription="@string/sanPham"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

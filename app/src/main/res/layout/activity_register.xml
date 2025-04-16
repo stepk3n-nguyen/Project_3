@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_background"
+        android:textColor="@color/white"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <TextView
+        android:id="@+id/titleDangKy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-15dp"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/white"
+        android:gravity="center|center_vertical"
+        android:text="@string/dangKy"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvLayout"
+        app:layout_constraintEnd_toEndOf="@+id/tvLayout"
+        app:layout_constraintStart_toStartOf="@+id/tvLayout" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="start"
+        android:text="@string/userName"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:cornerRadius="7dp"
+        app:layout_constraintStart_toStartOf="@+id/tvLayout"
+        app:layout_constraintTop_toBottomOf="@+id/titleDangKy" />
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background_edt"
+        android:backgroundTint="@color/white"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/blue"
+        android:hint="@string/nhapUsername"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvLayout"
+        app:layout_constraintStart_toStartOf="@+id/tvUserName"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="start"
+        android:text="@string/newPassword"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:cornerRadius="7dp"
+        app:layout_constraintStart_toStartOf="@+id/edUsername"
+        app:layout_constraintTop_toBottomOf="@+id/edUsername" />
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background_edt"
+        android:backgroundTint="@color/white"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/blue"
+        android:hint="@string/nhapPassword"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/edUsername"
+        app:layout_constraintStart_toStartOf="@+id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+
+    <TextView
+        android:id="@+id/tvConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="start"
+        android:text="@string/confirmPassword"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:cornerRadius="7dp"
+        app:layout_constraintStart_toStartOf="@+id/edPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+
+    <EditText
+        android:id="@+id/edConfirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background_edt"
+        android:backgroundTint="@color/white"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/blue"
+        android:hint="@string/nhapLaiPassword"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/edUsername"
+        app:layout_constraintStart_toStartOf="@+id/tvConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvConfirmPassword" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Project_3 final</string>
+    <string name="nhapmatkhau">Nhập mật khẩu</string>
+    <string name="dangnhap">Đăng nhập</string>
+    <string name="nhapemail">Nhập email</string>
+    <string name="chuacotaikhoandangkyngay">Chưa có tài khoản? Đăng ký ngay!</string>
+    <string name="tenDangNhapHoacMatKhauSai">Tên đăng nhập hoặc mật khẩu sai!</string>
+    <string name="troVe">Trở về</string>
+    <string name="back">Back</string>
+    <string name="timKiem">Tìm kiếm</string>
+    <string name="nutGioHang">Nút giỏ hàng</string>
+    <string name="sanPham">Sản phẩm</string>
+    <string name="giaSanPham">Giá sản phẩm</string>
+    <string name="vnd">VND</string>
+    <string name="tenSanPham">Tên sản phẩm</string>
+    <string name="dangXuat">Đăng xuất</string>
+    <string name="gia">Giá</string>
+    <string name="soLuong">Số lượng</string>
+    <string name="tongSoLuong0">Tổng số lượng: 0</string>
+    <string name="tongTien0d">Tổng tiền: 0đ</string>
+    <string name="_1">1</string>
+    <string name="_100_000d">100.000đ</string>
+    <string name="dangKy">Đăng ký</string>
+    <string name="userName">Username</string>
+    <string name="passWord">Password</string>
+    <string name="nhapUsername">Nhập Username</string>
+    <string name="nhapPassword">Nhập Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="nhapLaiPassword">Nhập lại Password</string>
+</resources>
