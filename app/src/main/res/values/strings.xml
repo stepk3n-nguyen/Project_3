@@ -29,4 +29,5 @@
     <string name="newPassword">New Password</string>
     <string name="nhapLaiPassword">Nhập lại Password</string>
     <string name="x">x</string>
+    <string name="thanhToan">Thanh toán</string>
 </resources>

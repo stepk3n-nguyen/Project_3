@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,5 +43,23 @@ class CartListActivity : AppCompatActivity() {
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
         txtTotalPrice.text = "Tổng cộng: $formattedPrice ₫"
+
+        val btnCheckout: Button = findViewById(R.id.btnCheckout)
+        btnCheckout.setOnClickListener {
+            val cartItems = CartManager.getCartList()
+
+            if (cartItems.isEmpty()) {
+                Toast.makeText(this, "Giỏ hàng đang trống!", Toast.LENGTH_SHORT).show()
+            } else {
+                val totalPrice = CartManager.getTotalPrice()
+                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
+                Toast.makeText(this, "Thanh toán thành công! Tổng tiền: ${formattedPrice}₫", Toast.LENGTH_LONG).show()
+
+                CartManager.clearCart()
+
+                recyclerView.adapter = CartAdapter(emptyList())
+                txtTotalPrice.text = "Tổng cộng: 0₫"
+            }
+        }
     }
 }
