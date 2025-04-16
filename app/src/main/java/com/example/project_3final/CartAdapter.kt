@@ -29,7 +29,7 @@ class CartAdapter(private val cartItems: List<Product>) :
         val product = cartItems[position]
         holder.txtName.text = product.name
         holder.txtPrice.text = product.price.toString()
-        holder.txtQty.text = "1"
+        holder.txtQty.text = product.quantity.toString()
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
         holder.txtPrice.text = "$formattedPrice ₫"
     }
