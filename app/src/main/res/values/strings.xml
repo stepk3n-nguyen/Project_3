@@ -28,4 +28,5 @@
     <string name="confirmPassword">Confirm Password</string>
     <string name="newPassword">New Password</string>
     <string name="nhapLaiPassword">Nhập lại Password</string>
+    <string name="x">x</string>
 </resources>

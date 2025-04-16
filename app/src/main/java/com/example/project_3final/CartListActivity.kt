@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import java.text.NumberFormat
-
 import java.util.Locale
 
 class CartListActivity : AppCompatActivity() {

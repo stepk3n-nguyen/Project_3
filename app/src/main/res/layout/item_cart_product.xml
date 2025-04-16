@@ -11,34 +11,51 @@
         android:id="@+id/txtCartName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
         android:layout_weight="1"
+        android:layout_marginEnd="10dp"
         android:text="@string/tenSanPham"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txtCartPrice"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtCartPrice"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:text="@string/_100_000d"
+        android:layout_marginEnd="10dp"
+        android:text="@string/x"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtCartQty"
-        app:layout_constraintTop_toTopOf="@+id/txtCartName" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/txtCartQty"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="@string/_1"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtCartPrice"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCartPrice"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="end|center_horizontal"
+        android:textSize="16sp"
+        android:text="@string/_100_000d"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtCartName" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
