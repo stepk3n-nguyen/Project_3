@@ -4,7 +4,7 @@ Các chức năng chính:</br>
   <li>Đăng ký/ Đăng nhập tài khoản</li>
   <li>Hiển thị sản phẩm theo danh sách cuộn(recycle view)</li>
   <li>Thêm sản phẩm vào giỏ hàng theo danh sách cuộn(recycle view)</li>
-  <li></li>
+  <li>Tính tổng số tiền của giỏ hàng</li>
 </ul>
 
 
