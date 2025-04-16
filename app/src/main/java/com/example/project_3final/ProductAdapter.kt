@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import java.text.NumberFormat
+import java.util.Locale
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -28,6 +30,8 @@ class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adap
         holder.txtName.text = product.name
         holder.txtPrice.text = product.price.toString()
         holder.imgProduct.setImageResource(product.imageResId)
+        val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
+        holder.txtPrice.text = "$formattedPrice ₫"
         holder.btnBuy.setOnClickListener {
             CartManager.addToCart(product)
             Toast.makeText(holder.itemView.context, "Đã thêm vào giỏ: ${product.name}", Toast.LENGTH_SHORT).show()

@@ -5,7 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.Locale
 
 class CartAdapter(private val cartItems: List<Product>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
@@ -27,6 +30,8 @@ class CartAdapter(private val cartItems: List<Product>) :
         holder.txtName.text = product.name
         holder.txtPrice.text = product.price.toString()
         holder.txtQty.text = "1"
+        val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
+        holder.txtPrice.text = "$formattedPrice ₫"
     }
 
     override fun getItemCount() = cartItems.size

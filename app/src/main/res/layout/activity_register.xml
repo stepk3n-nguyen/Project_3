@@ -15,7 +15,7 @@
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.7" />
@@ -125,5 +125,23 @@
         app:layout_constraintEnd_toEndOf="@+id/edUsername"
         app:layout_constraintStart_toStartOf="@+id/tvConfirmPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvConfirmPassword" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
+        android:text="@string/dangKy"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="15sp"
+        app:cornerRadius="7dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLayout"
+        app:layout_constraintEnd_toEndOf="@+id/edConfirmPassword"
+        app:layout_constraintStart_toStartOf="@+id/edConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edConfirmPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

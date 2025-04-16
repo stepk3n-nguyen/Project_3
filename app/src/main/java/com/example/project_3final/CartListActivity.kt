@@ -2,12 +2,16 @@ package com.example.project_3final
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import java.text.NumberFormat
+
+import java.util.Locale
 
 class CartListActivity : AppCompatActivity() {
 
@@ -34,5 +38,10 @@ class CartListActivity : AppCompatActivity() {
 
         val cartItems = CartManager.getCartList()
         recyclerView.adapter = CartAdapter(cartItems)
+
+        val txtTotalPrice: TextView = findViewById(R.id.tvTotalPrice)
+        val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
+        val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
+        txtTotalPrice.text = "Tổng cộng: $formattedPrice ₫"
     }
 }
