@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductListActivity : AppCompatActivity() {
+    private lateinit var adapter: ProductAdapter
+    private lateinit var productList: List<Product>
+    private lateinit var filteredList: MutableList<Product>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
@@ -20,7 +24,7 @@ class ProductListActivity : AppCompatActivity() {
         val imgBtn : TextView = findViewById(R.id.btnBack)
         val btnViewCart: ImageButton = findViewById(R.id.btnViewCart)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        val productList = listOf(
+        productList = listOf(
             Product("Áo thun JTeeMan Unisex", 100000, R.drawable.ao_thun_jteeman_unisex),
             Product("Quần Jeans Light Blue QJ050 Màu Xanh", 490000, R.drawable.quan_jeans_light_blue_qj050_mau_xanh),
             Product("Giày Converse Chuck Taylor All Star 1970s cao đen trắng", 1600000, R.drawable.giay_converse_chuck_taylor_all_star_1970s_cao_den_trang),
@@ -47,5 +51,31 @@ class ProductListActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = ProductAdapter(productList)
+
+        //sreach
+        filteredList = productList.toMutableList()
+        adapter = ProductAdapter(filteredList)
+
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.adapter = adapter
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                filterProducts(text.toString())
+            }
+        })
+    }
+    private fun filterProducts(query: String) {
+        filteredList.clear()
+        if (query.isEmpty()) {
+            filteredList.addAll(productList)
+        } else {
+            val lowerQuery = query.lowercase()
+            filteredList.addAll(productList.filter {
+                it.name.lowercase().contains(lowerQuery)
+            })
+        }
+        adapter.notifyDataSetChanged()
     }
 }
