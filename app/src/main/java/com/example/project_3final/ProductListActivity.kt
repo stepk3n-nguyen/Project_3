@@ -35,20 +35,6 @@ class ProductListActivity : AppCompatActivity() {
             Product("Bộ Chia USB Hub ORICO PAPW4A-U3-015-BK-EP", 220000, R.drawable.bo_chia_usb_hub_orico_papw4a_u3_015_bk_ep)
         )
 
-//        edtSearch.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {}
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                val query = s.toString().lowercase().trim()
-//                    val filtered = productList.filter {
-//                    it.name.lowercase().contains(query)
-//                }
-//                ProductAdapter.updateList(filtered)
-//            }
-//        })
-
         imgBtn.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
