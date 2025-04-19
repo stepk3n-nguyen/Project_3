@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_input"
-        android:hint="@string/nhapemail"
+        android:hint="@string/nhapTaiKhoan"
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:layout_marginLeft="20dp"

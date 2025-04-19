@@ -33,4 +33,10 @@
     <string name="sanPham_001">Sản phẩm 001</string>
     <string name="_999999d">999999đ</string>
     <string name="chiTietSanPham">Chi tiết sản phẩm</string>
+    <string name="nhapTaiKhoan">Nhập tài khoản</string>
+    <string name="xacNhanMatKhau">Xác nhận mật khẩu</string>
+    <string name="nhapLaiMatKhau">Nhập lại mật khẩu</string>
+    <string name="taiKhoan">Tài khoản</string>
+    <string name="matKhauMoi">Mật khẩu mới</string>
+    <string name="nhapMatKhauMoi">Nhập mật khẩu mới</string>
 </resources>
