@@ -30,4 +30,7 @@
     <string name="nhapLaiPassword">Nhập lại Password</string>
     <string name="x">x</string>
     <string name="thanhToan">Thanh toán</string>
+    <string name="sanPham_001">Sản phẩm 001</string>
+    <string name="_999999d">999999đ</string>
+    <string name="chiTietSanPham">Chi tiết sản phẩm</string>
 </resources>
