@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:contentDescription="@null" />
+        android:contentDescription="@string/danhSachSanPham" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -39,4 +39,6 @@
     <string name="taiKhoan">Tài khoản</string>
     <string name="matKhauMoi">Mật khẩu mới</string>
     <string name="nhapMatKhauMoi">Nhập mật khẩu mới</string>
+    <string name="danhSachSanPham">Danh sách sản phẩm</string>
+    <string name="daCoTaiKhoanDangNhapNgay">Đã có tài khoản? Đăng nhập ngay!</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.project_3final
 
+import android.content.Intent
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.edit
+import org.w3c.dom.Text
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -52,6 +54,12 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        val btnToLogin : TextView = findViewById(R.id.tvToLogin)
+        btnToLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
