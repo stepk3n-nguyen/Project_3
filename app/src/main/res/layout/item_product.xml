@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="330dp"
     android:layout_margin="3dp"
-    android:background="#FFFFFF"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/border_black">
 
     <ImageView
         android:id="@+id/imgProduct"
@@ -32,20 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
-
-    <TextView
-        android:id="@+id/donvi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:gravity="center_vertical"
-        android:text="@string/vnd"
-        android:textColor="@color/blue"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtPrice"
-        app:layout_constraintStart_toEndOf="@+id/txtPrice"
-        app:layout_constraintTop_toTopOf="@+id/txtPrice" />
 
     <TextView
         android:id="@+id/txtPrice"
