@@ -41,4 +41,5 @@
     <string name="nhapMatKhauMoi">Nhập mật khẩu mới</string>
     <string name="danhSachSanPham">Danh sách sản phẩm</string>
     <string name="daCoTaiKhoanDangNhapNgay">Đã có tài khoản? Đăng nhập ngay!</string>
+    <string name="logo">Logo</string>
 </resources>

@@ -63,6 +63,7 @@
         android:background="@drawable/bg_input"
         android:gravity="start|center_vertical"
         android:hint="@string/nhapTaiKhoan"
+        android:autofillHints="username"
         android:inputType="text"
         android:textColor="@color/black"
         android:textSize="10sp"
@@ -101,7 +102,9 @@
         app:cornerRadius="7dp"
         app:layout_constraintEnd_toEndOf="@+id/edUsername"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPassword"
+        tools:ignore="SmallSp"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tvConfirmPassword"
@@ -132,7 +135,9 @@
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/edUsername"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConfirmPassword"
+        tools:ignore="SmallSp"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnRegister"
