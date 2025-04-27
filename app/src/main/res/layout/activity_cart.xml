@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="5dp"
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,13 +15,14 @@
 
         <TextView
             android:id="@+id/btnBack"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
-            android:text="@string/back"
-            android:textColor="#535159"
-            android:textSize="20sp"
+            android:text="  Giỏ hàng"
+            android:textColor="@color/black"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_arrow_back_24" />
         <TextView
@@ -37,38 +39,6 @@
             app:cornerRadius="7dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/titleCartName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:text="@string/tenSanPham"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/titleCartQty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="5dp"
-            android:text="@string/soLuong"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/titleCartPrice"
-            android:layout_width="84dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="@string/gia"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCart"
         android:layout_width="match_parent"
@@ -80,14 +50,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="2dp">
 
         <TextView
             android:id="@+id/tvTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:paddingBottom="2dp"
+            android:gravity="bottom"
             android:text="@string/tongTien0d"
+            android:textColor="@color/blue"
             android:textSize="16sp" />
 
         <TextView

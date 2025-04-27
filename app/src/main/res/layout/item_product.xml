@@ -6,7 +6,7 @@
     android:layout_height="330dp"
     android:layout_margin="3dp"
     android:padding="10dp"
-    android:background="@drawable/border_black">
+    android:background="@drawable/border_gray">
 
     <ImageView
         android:id="@+id/imgProduct"
@@ -51,7 +51,7 @@
         android:backgroundTint="#2196F3"
         android:insetTop="5dp"
         android:insetBottom="5dp"
-        android:text="Add to cart"
+        android:text="@string/add_to_cart"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:cornerRadius="7dp"

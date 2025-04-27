@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ class CartAdapter(private val cartItems: List<Product>) :
         val txtName: TextView = view.findViewById(R.id.txtCartName)
         val txtPrice: TextView = view.findViewById(R.id.txtCartPrice)
         val txtQty: TextView = view.findViewById(R.id.txtCartQty)
+        val imgView: ImageView = itemView.findViewById(R.id.imgProduct)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -30,6 +32,7 @@ class CartAdapter(private val cartItems: List<Product>) :
         holder.txtName.text = product.name
         holder.txtPrice.text = product.price.toString()
         holder.txtQty.text = product.quantity.toString()
+        holder.imgView.setImageResource(product.imageResId)
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
         holder.txtPrice.text = "$formattedPrice ₫"
     }
