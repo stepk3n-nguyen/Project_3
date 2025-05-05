@@ -60,7 +60,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:contentDescription="@string/gioHangTrong"
-            android:src="@drawable/empty_box_32" />
+            android:src="@drawable/ic_empty_box_40" />
 
         <TextView
             android:id="@+id/tvEmptyCart"
