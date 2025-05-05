@@ -42,9 +42,10 @@ class CartListActivity : AppCompatActivity() {
 
         val txtTotalPrice: TextView = findViewById(R.id.tvTotalPrice)
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
-
+        //------------Sơ cua-------------------
         val tvEmptyCart: TextView = findViewById(R.id.tvEmptyCart)
         val imgEmptyCart: ImageView = findViewById(R.id.imgEmptyCart)
+        //------------Sơ cua-------------------
         val emptyCart: LinearLayout = findViewById(R.id.emptyCart)
         if (cartItems.isEmpty()) {
             recyclerView.visibility = View.GONE
