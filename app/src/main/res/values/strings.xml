@@ -49,4 +49,5 @@
     <string name="minus">-</string>
     <string name="gioHang">Giỏ hàng</string>
     <string name="gioHangTrong">Giỏ hàng trống</string>
+    <string name="gioHangTrong_exclamation_mark">Giỏ hàng trống!!!</string>
 </resources>

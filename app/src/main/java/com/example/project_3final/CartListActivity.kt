@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import java.text.NumberFormat
@@ -41,12 +44,14 @@ class CartListActivity : AppCompatActivity() {
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
 
         val tvEmptyCart: TextView = findViewById(R.id.tvEmptyCart)
+        val imgEmptyCart: ImageView = findViewById(R.id.imgEmptyCart)
+        val emptyCart: LinearLayout = findViewById(R.id.emptyCart)
         if (cartItems.isEmpty()) {
             recyclerView.visibility = View.GONE
-            tvEmptyCart.visibility = View.VISIBLE
+            emptyCart.visibility = View.VISIBLE
         } else {
             recyclerView.visibility = View.VISIBLE
-            tvEmptyCart.visibility = View.GONE
+            emptyCart.visibility = View.GONE
         }
 
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)

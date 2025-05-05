@@ -44,17 +44,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:contentDescription="@string/danhSachSanPham" />
+        android:contentDescription="@string/danhSachSanPham"
+        android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/tvEmptyCart"
-        android:text="@string/gioHangTrong"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:visibility="gone"
+    <LinearLayout
+        android:id="@+id/emptyCart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imgEmptyCart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/gioHangTrong"
+            android:src="@drawable/empty_box_32" />
+
+        <TextView
+            android:id="@+id/tvEmptyCart"
+            android:text="@string/gioHangTrong_exclamation_mark"
+            android:textSize="18sp"
+            android:textColor="@color/dark_gray"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
