@@ -40,7 +40,7 @@
         android:textAlignment="center"
         android:textSize="16sp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintEnd_toStartOf="@+id/btnIncrease"
         app:layout_constraintTop_toTopOf="@+id/txtCartPrice" />
 
     <TextView
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/btnMinus"
+        android:id="@+id/btnDecrease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"
@@ -79,7 +79,7 @@
         app:layout_constraintTop_toTopOf="@+id/txtCartQty" />
 
     <TextView
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnIncrease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"

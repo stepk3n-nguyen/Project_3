@@ -21,6 +21,8 @@ class CartAdapter(private val cartItems: List<Product>, private val onCartChange
         val txtName: TextView = view.findViewById(R.id.txtCartName)
         val txtPrice: TextView = view.findViewById(R.id.txtCartPrice)
         val txtQty: TextView = view.findViewById(R.id.txtCartQty)
+        val btnIncrease: TextView= itemView.findViewById<Button>(R.id.btnIncrease)
+        val btnDecrease: TextView = itemView.findViewById<Button>(R.id.btnDecrease)
         val imgView: ImageView = itemView.findViewById(R.id.imgProduct)
         val btnDelete: TextView = view.findViewById(R.id.btnDelete)
     }
@@ -42,6 +44,18 @@ class CartAdapter(private val cartItems: List<Product>, private val onCartChange
             Toast.makeText(holder.itemView.context, "Đã xóa khỏi giỏ: ${product.name}", Toast.LENGTH_SHORT).show()
             onCartChanged()
         }
+        holder.btnIncrease.setOnClickListener {
+            product.quantity++
+            onCartChanged()
+        }
+
+        holder.btnDecrease.setOnClickListener {
+            if (product.quantity > 1) {
+                product.quantity--
+                onCartChanged()
+            }
+        }
+
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
         holder.txtPrice.text = "$formattedPrice ₫"
     }

@@ -14,7 +14,6 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class CartListActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -38,13 +37,7 @@ class CartListActivity : AppCompatActivity() {
         val cartItems = CartManager.getCartList()
         recyclerView.adapter = CartAdapter(cartItems, onCartChanged = {recreate()})
 
-        val adapter = CartAdapter(
-            cartItems,
-            onCartChanged = {
-                recreate()
-            }
-        )
-        recyclerView.adapter = adapter
+
 
         val txtTotalPrice: TextView = findViewById(R.id.tvTotalPrice)
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
@@ -68,5 +61,13 @@ class CartListActivity : AppCompatActivity() {
                 txtTotalPrice.text = "Tổng cộng: 0₫"
             }
         }
+
+        val adapter = CartAdapter(
+            cartItems,
+            onCartChanged = {
+                recreate()
+            }
+        )
+        recyclerView.adapter = adapter
     }
 }
