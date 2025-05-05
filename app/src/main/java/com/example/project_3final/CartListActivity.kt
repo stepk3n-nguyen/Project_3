@@ -32,12 +32,19 @@ class CartListActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
         val recyclerView: RecyclerView = findViewById(R.id.recyclerCart)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val cartItems = CartManager.getCartList()
-        recyclerView.adapter = CartAdapter(cartItems)
+        recyclerView.adapter = CartAdapter(cartItems, onCartChanged = {recreate()})
+
+        val adapter = CartAdapter(
+            cartItems,
+            onCartChanged = {
+                recreate()
+            }
+        )
+        recyclerView.adapter = adapter
 
         val txtTotalPrice: TextView = findViewById(R.id.tvTotalPrice)
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
@@ -57,7 +64,7 @@ class CartListActivity : AppCompatActivity() {
 
                 CartManager.clearCart()
 
-                recyclerView.adapter = CartAdapter(emptyList())
+                recyclerView.adapter = CartAdapter(emptyList(), onCartChanged = {recreate()})
                 txtTotalPrice.text = "Tổng cộng: 0₫"
             }
         }

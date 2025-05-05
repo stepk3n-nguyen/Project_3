@@ -1,5 +1,6 @@
 package com.example.project_3final
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,18 +8,21 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.recreate
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import java.text.NumberFormat
 import java.util.Locale
 
-class CartAdapter(private val cartItems: List<Product>) :
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(private val cartItems: List<Product>, private val onCartChanged: () -> Unit)
+    : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName: TextView = view.findViewById(R.id.txtCartName)
         val txtPrice: TextView = view.findViewById(R.id.txtCartPrice)
         val txtQty: TextView = view.findViewById(R.id.txtCartQty)
         val imgView: ImageView = itemView.findViewById(R.id.imgProduct)
+        val btnDelete: TextView = view.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -33,6 +37,11 @@ class CartAdapter(private val cartItems: List<Product>) :
         holder.txtPrice.text = product.price.toString()
         holder.txtQty.text = product.quantity.toString()
         holder.imgView.setImageResource(product.imageResId)
+        holder.btnDelete.setOnClickListener {
+            CartManager.removeFromCart(product)
+            Toast.makeText(holder.itemView.context, "Đã xóa khỏi giỏ: ${product.name}", Toast.LENGTH_SHORT).show()
+            onCartChanged()
+        }
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(product.price)
         holder.txtPrice.text = "$formattedPrice ₫"
     }

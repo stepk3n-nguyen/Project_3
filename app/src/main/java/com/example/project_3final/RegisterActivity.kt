@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Lưu account vào SharedPreferences
+            // lưu account vào SharedPreferences
             val prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
             prefs.edit() {
                 putString("username", username)
