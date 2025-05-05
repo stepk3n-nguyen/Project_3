@@ -37,17 +37,24 @@ class CartListActivity : AppCompatActivity() {
         val cartItems = CartManager.getCartList()
         recyclerView.adapter = CartAdapter(cartItems, onCartChanged = {recreate()})
 
-
-
         val txtTotalPrice: TextView = findViewById(R.id.tvTotalPrice)
         val totalPrice = CartManager.getCartList().sumOf { it.price * it.quantity }
+
+        val tvEmptyCart: TextView = findViewById(R.id.tvEmptyCart)
+        if (cartItems.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            tvEmptyCart.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            tvEmptyCart.visibility = View.GONE
+        }
+
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
         txtTotalPrice.text = "Tổng cộng: $formattedPrice ₫"
 
         val btnCheckout: Button = findViewById(R.id.btnCheckout)
         btnCheckout.setOnClickListener {
             val cartItems = CartManager.getCartList()
-
             if (cartItems.isEmpty()) {
                 Toast.makeText(this, "Giỏ hàng đang trống!", Toast.LENGTH_SHORT).show()
             } else {

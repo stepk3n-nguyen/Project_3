@@ -46,6 +46,16 @@
         android:layout_weight="1"
         android:contentDescription="@string/danhSachSanPham" />
 
+    <TextView
+        android:id="@+id/tvEmptyCart"
+        android:text="@string/gioHangTrong"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,8 +66,8 @@
             android:id="@+id/tvTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingBottom="2dp"
             android:gravity="bottom"
+            android:paddingBottom="2dp"
             android:text="@string/tongTien0d"
             android:textColor="@color/blue"
             android:textSize="16sp" />
@@ -65,15 +75,16 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/btnCheckout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:backgroundTint="@color/blue"
             android:text="@string/thanhToan"
-            android:textSize="16sp"
             android:textColor="@color/white"
-            app:cornerRadius="7dp"/>
+            android:textSize="16sp"
+            app:cornerRadius="7dp" />
     </LinearLayout>
 </LinearLayout>
