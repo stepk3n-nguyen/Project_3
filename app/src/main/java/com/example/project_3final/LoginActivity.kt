@@ -7,36 +7,54 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity;
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var edtEmail: EditText
+    private lateinit var edtPassword: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var btnToRegister: TextView
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val edtUsername: EditText = findViewById(R.id.etUsername)
-        val edtPassword: EditText = findViewById(R.id.etPassword)
-        val btnLogin: Button = findViewById(R.id.btnLogin)
-        val txtMessage: TextView = findViewById(R.id.tvError)
+        auth = FirebaseAuth.getInstance()
 
-        btnLogin.setOnClickListener {
-            val inputUsername = edtUsername.text.toString().trim()
-            val inputPassword = edtPassword.text.toString()
+        edtEmail = findViewById(R.id.etUsername)
+        edtPassword = findViewById(R.id.etPassword)
+        btnLogin = findViewById(R.id.btnLogin)
 
-            val prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-            val savedUsername = prefs.getString("username", "")
-            val savedPassword = prefs.getString("password", "")
-
-            if (inputUsername == savedUsername && inputPassword == savedPassword) {
-                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, ProductListActivity::class.java))
-            } else {
-                txtMessage.text = getString(R.string.tenDangNhapHoacMatKhauSai)
-                Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show()
-            }
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, ProductListActivity::class.java))
+            finish()
         }
 
-        val btnToRegister = findViewById<TextView>(R.id.tvRegister)
+        btnLogin.setOnClickListener {
+            val email = edtEmail.text.toString().trim()
+            val password = edtPassword.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, ProductListActivity::class.java))
+                        finish()
+                    } else {
+                        val error = task.exception?.message ?: "Lỗi không xác định"
+                        Toast.makeText(this, "Đăng nhập thất bại: $error", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+        btnToRegister = findViewById(R.id.tvRegister)
         btnToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
