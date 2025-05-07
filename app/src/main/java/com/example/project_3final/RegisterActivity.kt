@@ -56,16 +56,6 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // lưu account vào SharedPreferences
-//            val prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-//            prefs.edit() {
-//                putString("username", username)
-//                putString("password", password)
-//                    .apply()
-//            }
-//
-//            Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show()
-//            finish()
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
