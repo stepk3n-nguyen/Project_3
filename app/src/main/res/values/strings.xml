@@ -56,4 +56,9 @@
     <string name="example_gmail_com">example@gmail.com</string>
     <string name="profiole_icon">Profiole icon</string>
     <string name="logo_icon">Logo icon</string>
+    <string name="logo_uid">Logo UID</string>
+    <string name="logo_email">Logo email</string>
+    <string name="logo_profile">Logo Profile</string>
+    <string name="example_name">Example Name</string>
+    <string name="_2345678910jqka">2345678910JQKA</string>
 </resources>

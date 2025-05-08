@@ -35,15 +35,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-    <TextView
-        android:id="@+id/titleEmail"
+    <EditText
+        android:id="@+id/edtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="18sp"
+        android:text="CHƯA CÓ TÊN"
+        android:textColor="@color/blue"
+        android:textSize="26sp"
+        android:inputType="textCapCharacters"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfile"
+        app:layout_constraintStart_toStartOf="@+id/imgProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+
+    <ImageView
+        android:id="@+id/tittleProfileName"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/logo_profile"
+        android:scaleType="center"
+        android:src="@drawable/ic_person_30"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:maxLines="2"
+        android:text="@string/example_name"
         android:textColor="@color/black"
-        android:gravity="center_vertical"
-        app:drawableStartCompat="@drawable/ic_mail_30"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tittleProfileName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tittleProfileName"
+        app:layout_constraintTop_toTopOf="@+id/tittleProfileName" />
+
+    <ImageView
+        android:id="@+id/titleEmail"
+        android:contentDescription="@string/logo_email"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_mail_30"
         app:layout_constraintStart_toStartOf="@+id/tittleProfileName"
         app:layout_constraintTop_toBottomOf="@+id/tittleProfileName" />
 
@@ -61,15 +98,14 @@
         app:layout_constraintStart_toEndOf="@+id/titleEmail"
         app:layout_constraintTop_toTopOf="@+id/titleEmail" />
 
-    <TextView
+    <ImageView
         android:id="@+id/titleUid"
+        android:contentDescription="@string/logo_uid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:drawableStartCompat="@drawable/ic_code_30"
+        android:scaleType="center"
+        android:src="@drawable/ic_code_30"
         app:layout_constraintStart_toStartOf="@+id/titleEmail"
         app:layout_constraintTop_toBottomOf="@+id/titleEmail" />
 
@@ -80,7 +116,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:maxLines="2"
-        android:text="123qwe456rty789uio"
+        android:text="@string/_2345678910jqka"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/titleUid"
@@ -98,32 +134,4 @@
         app:cornerRadius="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tittleProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:gravity="center_vertical"
-        app:drawableStartCompat="@drawable/ic_person_30"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
-
-    <TextView
-        android:id="@+id/tvProfileName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:maxLines="2"
-        android:text="Example Name"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tittleProfileName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tittleProfileName"
-        app:layout_constraintTop_toTopOf="@+id/tittleProfileName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

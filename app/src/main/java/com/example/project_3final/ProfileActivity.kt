@@ -18,6 +18,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var btnLogout: Button
     private lateinit var btnBack: TextView
     private lateinit var btnProfile: ImageView
+    private lateinit var edtName: EditText
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,6 @@ class ProfileActivity : AppCompatActivity() {
 
         tvEmail = findViewById(R.id.tvEmail)
         tvUid = findViewById(R.id.tvUid)
-
 
         val user = auth.currentUser
 
@@ -60,5 +60,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        val edtName = findViewById<EditText>(R.id.edtName)
+        edtName.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+            source.toString().uppercase()
+        })
     }
 }
