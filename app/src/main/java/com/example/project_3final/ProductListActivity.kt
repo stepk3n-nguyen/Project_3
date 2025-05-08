@@ -18,9 +18,9 @@ class ProductListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_product_list)
         val edtSearch : EditText = findViewById(R.id.etSearch)
-        val imgBtn : TextView = findViewById(R.id.btnBack)
         val btnViewCart: ImageButton = findViewById(R.id.btnViewCart)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         val btnProfile: ImageButton = findViewById(R.id.imgProfile)
@@ -46,12 +46,6 @@ class ProductListActivity : AppCompatActivity() {
 
         btnProfile.setOnClickListener{
             val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        imgBtn.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
