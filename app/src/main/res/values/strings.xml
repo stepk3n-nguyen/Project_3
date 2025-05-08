@@ -50,4 +50,9 @@
     <string name="gioHang">Giỏ hàng</string>
     <string name="gioHangTrong">Giỏ hàng trống</string>
     <string name="gioHangTrong_exclamation_mark">Giỏ hàng trống!!!</string>
+    <string name="uid">UID:</string>
+    <string name="email">Email:</string>
+    <string name="anhHoSo">Ảnh hồ sơ</string>
+    <string name="example_gmail_com">example@gmail.com</string>
+    <string name="profiole_icon">Profiole icon</string>
 </resources>

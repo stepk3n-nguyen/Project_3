@@ -28,12 +28,6 @@ class CartListActivity : AppCompatActivity() {
             finish()
         }
 
-        val logoutBtn : Button = findViewById(R.id.btnLogout)
-        logoutBtn.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
         val recyclerView: RecyclerView = findViewById(R.id.recyclerCart)
         recyclerView.layoutManager = LinearLayoutManager(this)
 

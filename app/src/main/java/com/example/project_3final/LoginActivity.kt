@@ -28,10 +28,10 @@ class LoginActivity : AppCompatActivity() {
         edtPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
 
-        if (auth.currentUser != null) {
-            startActivity(Intent(this, ProductListActivity::class.java))
-            finish()
-        }
+//        if (auth.currentUser != null) {
+//            startActivity(Intent(this, ProductListActivity::class.java))
+//            finish()
+//        }
 
         btnLogin.setOnClickListener {
             val email = edtEmail.text.toString().trim()

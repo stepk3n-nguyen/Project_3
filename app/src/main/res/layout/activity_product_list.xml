@@ -44,14 +44,24 @@
             android:id="@+id/btnViewCart"
             android:contentDescription="@string/nutGioHang"
             android:src="@drawable/ic_shopping_cart_30"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white" />
+
+        <ImageButton
+            android:contentDescription="@string/profiole_icon"
+            android:id="@+id/imgProfile"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_marginEnd="3dp"
             android:backgroundTint="@color/white"
-            app:cornerRadius="7dp" />
+            android:src="@drawable/ic_profile_circle_30"/>
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:contentDescription="@string/sanPham"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

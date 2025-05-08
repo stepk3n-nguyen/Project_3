@@ -23,6 +23,7 @@ class ProductListActivity : AppCompatActivity() {
         val imgBtn : TextView = findViewById(R.id.btnBack)
         val btnViewCart: ImageButton = findViewById(R.id.btnViewCart)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        val btnProfile: ImageButton = findViewById(R.id.imgProfile)
         productList = listOf(
             Product("Dây mạng cat5e UTP Lention Lan-5E05 dài 5M", 270000, R.drawable.day_mang_cat5e_utp_lention_lan_5e05_dai_5m),
             Product("USB to 3.5mm Jack Audio Adapter", 90000, R.drawable.usb_to_jack_3_5mm),
@@ -43,6 +44,12 @@ class ProductListActivity : AppCompatActivity() {
             Product("Ổ cứng HDD WD 1TB Blue 3.5 inch, 7200RPM, SATA, 64MB Cache (WD10EZEX)", 1399000, R.drawable.o_cung_hdd_western_caviar_blue_0000_layer_1)
         )
 
+        btnProfile.setOnClickListener{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         imgBtn.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -56,7 +63,6 @@ class ProductListActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = ProductAdapter(productList)
 
-        //sreach
         filteredList = productList.toMutableList()
         adapter = ProductAdapter(filteredList)
 
