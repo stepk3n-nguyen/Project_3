@@ -1,9 +1,7 @@
 package com.example.project_3final;
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputFilter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,16 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ProfileActivity : AppCompatActivity() {
+    private lateinit var tvProfileName: TextView
     private lateinit var tvEmail: TextView
     private lateinit var tvUid: TextView
     private lateinit var btnLogout: Button
     private lateinit var btnBack: TextView
     private lateinit var btnProfile: ImageView
-    private lateinit var edtName: EditText
+    private lateinit var tvName: TextView
     private lateinit var btnUpdateName: ImageButton
     private lateinit var auth: FirebaseAuth
 
@@ -32,17 +33,38 @@ class ProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        tvProfileName = findViewById(R.id.tvProfileName)
         tvEmail = findViewById(R.id.tvEmail)
         tvUid = findViewById(R.id.tvUid)
+        tvName = findViewById(R.id.tvName)
+
+        val database = FirebaseDatabase.getInstance("https://project-3-1ed87-default-rtdb.asia-southeast1.firebasedatabase.app")
 
         val user = auth.currentUser
-
         if (user != null) {
             tvEmail.text = "${user.email}"
             tvUid.text = "${user.uid}"
         } else {
             tvEmail.text = "Chưa đăng nhập"
             tvUid.text = "???"
+        }
+
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            val userRef = database.getReference("users").child(uid)
+            userRef.child("displayName").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val name = snapshot.getValue(String::class.java)
+                    tvName.text = name ?: "Chưa có tên"
+                    tvProfileName.text = name ?: "Chưa có tên"
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@ProfileActivity, "Lỗi khi tải tên: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            tvName.text = "Chưa đăng nhập"
+            tvProfileName.text = "Chưa đăng nhập"
         }
 
         btnBack = findViewById(R.id.btnBack)
@@ -71,49 +93,44 @@ class ProfileActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        btnProfile = findViewById(R.id.imgProfile)
-        btnProfile.setOnClickListener{
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        btnProfile = findViewById(R.id.imgProfile)
+//        btnProfile.setOnClickListener{
+//            val intent = Intent(this, ProfileActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
         btnUpdateName = findViewById(R.id.imgEdit)
         btnUpdateName.setOnClickListener{
-            val newName = edtName.text.toString().trim()
-            if (newName.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập tên", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            val dialogView = layoutInflater.inflate(R.layout.layout_dialog_editname, null)
+            val newName = dialogView.findViewById<EditText>(R.id.edtName)
 
-            val profileUpdates = UserProfileChangeRequest.Builder()
-                .setDisplayName(newName)
-                .build()
+            val dialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create()
 
-            user?.updateProfile(profileUpdates)
-                ?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Ghi tên mới vào Realtime Database
-                        val uid = user.uid
-                        val databaseRef = FirebaseDatabase.getInstance().getReference("users").child(uid)
-                        databaseRef.child("displayName").setValue(newName)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Cập nhật tên thành công!", Toast.LENGTH_SHORT).show()
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Lỗi lưu database: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        Toast.makeText(this, "Cập nhật tên thành công!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val error = task.exception?.message ?: "Lỗi không xác định"
-                        Toast.makeText(this, "Thất bại: $error", Toast.LENGTH_SHORT).show()
-                    }
+            dialogView.findViewById<Button>(R.id.btnYes).setOnClickListener {
+                val name = newName.text.toString()
+                if (name.isNotBlank()) {
+                    val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
+                    val databaseRef = database.getReference("users").child(uid)
+                    databaseRef.child("displayName").setValue(name)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Cập nhật tên thành công ($name)!", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this,"Lỗi lưu database: ${e.message}",Toast.LENGTH_SHORT).show()
+                        }
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this,"Vui lòng không để trống!",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
+            }
+            dialogView.findViewById<Button>(R.id.btnNo).setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
         }
-
-        val edtName = findViewById<EditText>(R.id.edtName)
-        edtName.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-            source.toString().uppercase()
-        })
     }
 }

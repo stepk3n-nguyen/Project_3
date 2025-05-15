@@ -35,14 +35,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-    <EditText
-        android:id="@+id/edtName"
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/bg_input_no_border"
-        android:inputType="textCapCharacters"
-        android:text="@string/chuaCoTen"
+        android:layout_marginTop="5dp"
+        android:text="@string/example_name"
         android:textColor="@color/blue"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/imgProfile"
@@ -57,9 +55,9 @@
         android:layout_marginStart="5dp"
         android:background="@color/white"
         android:src="@drawable/ic_edit_24"
-        app:layout_constraintBottom_toBottomOf="@+id/edtName"
-        app:layout_constraintStart_toEndOf="@+id/edtName"
-        app:layout_constraintTop_toTopOf="@+id/edtName" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvName"
+        app:layout_constraintStart_toEndOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="@+id/tvName" />
 
     <ImageView
         android:id="@+id/tittleProfileName"
@@ -71,7 +69,7 @@
         android:scaleType="center"
         android:src="@drawable/ic_person_30"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
         android:id="@+id/tvProfileName"
