@@ -61,4 +61,7 @@
     <string name="logo_profile">Logo Profile</string>
     <string name="example_name">Example Name</string>
     <string name="_2345678910jqka">2345678910JQKA</string>
+    <string name="email_normal">Email</string>
+    <string name="suaTen">Sửa tên</string>
+    <string name="chuaCoTen">CHƯA CÓ TÊN</string>
 </resources>

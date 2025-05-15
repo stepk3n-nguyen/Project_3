@@ -67,6 +67,11 @@ class CartListActivity : AppCompatActivity() {
                 recyclerView.adapter = CartAdapter(emptyList(), onCartChanged = {recreate()})
                 txtTotalPrice.text = "Tổng cộng: 0₫"
             }
+            //---------------test-------------------//
+            //payment confirm
+//            val item = mutableListOf<String>()
+//            repeat()
+            //---------------test-------------------//
         }
 
         val adapter = CartAdapter(
