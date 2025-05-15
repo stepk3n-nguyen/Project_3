@@ -1,6 +1,7 @@
 <!--///////////////////////////////////////////////////////////////////////-->
 <h1>ỨNG DỤNG BÁN HÀNG ĐIỆN TỬ (trên mobile)</h1>
 <p><i>(Ứng dụng này là đề tài thực hành môn Project 3)</i></p></br>
+<h2>1. TỔNG QUAN</h2>
 Các chức năng chính:</br>
 <ul>
   <li>Đăng ký/ Đăng nhập tài khoản người dùng</li>
@@ -14,7 +15,7 @@ Các chức năng chính:</br>
   <li>Thanh toán giỏ hàng</li>
   <li>Xem thông tin cá nhân (Tên, Email, UID) và sửa (Tên)</li>
 </ul>
-<h2>Demo output</h2>
+<h2>2. DEMO OUTPUT</h2>
 <table>
   <tbody>
     <tr>
@@ -89,3 +90,6 @@ Các chức năng chính:</br>
       </td>
     </tr>
   </tbody>
+</table>
+<h2>3. CÁCH SỬ DỤNG (đối với Desktop/Laptop đã cài Android Studio và máy điện thoại có hệ điều hành Android đã bật CHẾ ĐỘ DÀNH CHO NHÀ PHÁT TRIỂN)</h2>
+<p><i>If you know, you know...😏</i></p>
