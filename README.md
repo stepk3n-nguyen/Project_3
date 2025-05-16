@@ -70,10 +70,10 @@ Các chức năng chính:</br>
         <img src="https://github.com/user-attachments/assets/7977fb62-8308-4ed2-b004-e7d7d09a19f0" width="250" alt="Profile">
       </td>
       <td>
-        <img src="https://github.com/user-attachments/assets/aa1d31b5-2604-4044-8fe3-8018c4de7846" width="250" alt="Edited profile">
+        <img src="https://github.com/user-attachments/assets/0455e8f2-505d-4b7b-9be4-a6b6e986645e" width="250" alt="Edited profile">
       </td>
       <td>
-        <img src="https://github.com/user-attachments/assets/4c101136-b577-483e-b451-51f90ef73802" width="250" alt="Logout dialog">
+        <img src="https://github.com/user-attachments/assets/dc802b52-846f-421f-a99a-c498bfa79516" width="250" alt="Logout dialog">
       </td>
     </tr>
   </tbody>
