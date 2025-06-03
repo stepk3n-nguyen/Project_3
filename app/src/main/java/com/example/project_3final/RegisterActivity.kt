@@ -3,17 +3,10 @@ package com.example.project_3final
 import android.content.Intent
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import androidx.core.content.edit
-import org.w3c.dom.Text
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {

@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import java.text.NumberFormat
@@ -58,20 +56,16 @@ class CartListActivity : AppCompatActivity() {
             if (cartItems.isEmpty()) {
                 Toast.makeText(this, "Giỏ hàng đang trống!", Toast.LENGTH_SHORT).show()
             } else {
-                val totalPrice = CartManager.getTotalPrice()
-                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
-                Toast.makeText(this, "Thanh toán thành công! Tổng tiền: ${formattedPrice}₫", Toast.LENGTH_LONG).show()
-
-                CartManager.clearCart()
-
-                recyclerView.adapter = CartAdapter(emptyList(), onCartChanged = {recreate()})
-                txtTotalPrice.text = "Tổng cộng: 0₫"
+                val intent = Intent(this,DeliveryActivity::class.java)
+                startActivity(intent)
+                finish()
+//                val totalPrice = CartManager.getTotalPrice()
+//                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
+//                Toast.makeText(this, "Thanh toán thành công! Tổng tiền: ${formattedPrice}₫", Toast.LENGTH_LONG).show()
+//                CartManager.clearCart()
+//                recyclerView.adapter = CartAdapter(emptyList(), onCartChanged = {recreate()})
+//                txtTotalPrice.text = "Tổng cộng: 0₫"
             }
-            //---------------test-------------------//
-            //payment confirm
-//            val item = mutableListOf<String>()
-//            repeat()
-            //---------------test-------------------//
         }
 
         val adapter = CartAdapter(

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -16,6 +15,6 @@ class SplashScreenActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java) // đổi MainActivity thành màn hình bạn muốn
             startActivity(intent)
             finish()
-        }, 2500)
+        }, 2000)
     }
 }

@@ -33,7 +33,7 @@
         android:gravity="center|center_vertical"
         android:text="@string/dangKy"
         android:textColor="@color/blue"
-        android:textSize="24sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvLayout"
         app:layout_constraintStart_toStartOf="@+id/tvLayout"
@@ -47,7 +47,7 @@
         android:gravity="start"
         android:text="@string/email_normal"
         android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:cornerRadius="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleDangKy" />
@@ -81,7 +81,7 @@
         android:gravity="start"
         android:text="@string/matKhauMoi"
         android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:cornerRadius="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edUsername" />
@@ -114,7 +114,7 @@
         android:gravity="start"
         android:text="@string/xacNhanMatKhau"
         android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:cornerRadius="7dp"
         app:layout_constraintStart_toStartOf="@+id/edPassword"
         app:layout_constraintTop_toBottomOf="@+id/edPassword" />

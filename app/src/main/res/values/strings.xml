@@ -64,4 +64,14 @@
     <string name="email_normal">Email</string>
     <string name="suaTen">Sửa tên</string>
     <string name="chuaCoTen">CHƯA CÓ TÊN</string>
+    <string name="dangNhapBangGoogle">Đăng nhập bằng Google</string>
+    <string name="default_web_client_id">562811102361-umuce3vjlqcfev2q9aik7vqmmm3k26mq.apps.googleusercontent.com</string>
+    <string name="hoacDangNhapBang">hoặc đăng nhập bằng:</string>
+    <string name="soDienThoai">Số điện thoại</string>
+    <string name="nhapSoDienThoai">Nhập số điện thoại</string>
+    <string name="nhapTenNguoiNhan">Nhập tên người nhận</string>
+    <string name="tenNguoiNhan">Tên người nhận</string>
+    <string name="thongTinGiaoHang">THÔNG TIN GIAO HÀNG</string>
+    <string name="diaChiGiaoHang">Địa chỉ giao hàng</string>
+    <string name="giaoHang">Giao hàng</string>
 </resources>

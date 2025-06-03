@@ -44,6 +44,10 @@
             android:name=".ProfileActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".DeliveryActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
