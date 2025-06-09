@@ -74,4 +74,7 @@
     <string name="thongTinGiaoHang">THÔNG TIN GIAO HÀNG</string>
     <string name="diaChiGiaoHang">Địa chỉ giao hàng</string>
     <string name="giaoHang">Giao hàng</string>
+    <string name="soTien0d">Số tiền: 0đ</string>
+    <string name="thongTinChuyenKhoan">Thông tin chuyển khoản</string>
+    <string name="nguoiThuHuongNguyenAnhTuan">Người thụ hưởng: Nguyễn Anh Tuấn</string>
 </resources>

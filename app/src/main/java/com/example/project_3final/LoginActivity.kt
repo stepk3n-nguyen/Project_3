@@ -1,4 +1,4 @@
-package com.example.project_3final;
+package com.example.project_3final
 
 import android.annotation.SuppressLint
 import android.content.Intent;

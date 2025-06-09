@@ -28,7 +28,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintHeight_percent="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
@@ -145,16 +145,50 @@
         app:layout_constraintTop_toBottomOf="@+id/spnDistrict" />
 
     <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="0dp"
+        android:id="@+id/tvTitleQR"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tongTien0d"
+        android:layout_marginTop="5dp"
+        android:text="@string/thongTinChuyenKhoan"
         android:textColor="@color/blue"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:cornerRadius="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/tvAddress"
+        app:layout_constraintStart_toStartOf="@+id/tvAddress"
+        app:layout_constraintTop_toBottomOf="@+id/spnWard" />
+
+    <TextView
+        android:id="@+id/tvQRReceiverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/nguoiThuHuongNguyenAnhTuan"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleQR"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleQR"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleQR" />
+
+    <TextView
+        android:id="@+id/tvQRPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/soTien0d"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tvQRReceiverName"
+        app:layout_constraintStart_toStartOf="@+id/tvQRReceiverName"
+        app:layout_constraintTop_toBottomOf="@+id/tvQRReceiverName" />
+
+    <ImageView
+        android:id="@+id/imgVietQR"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/tvAddress"
+        app:layout_constraintStart_toStartOf="@+id/tvAddress"
+        app:layout_constraintTop_toBottomOf="@+id/tvQRPrice" />
 
     <Button
         android:id="@+id/btnConfirm"
