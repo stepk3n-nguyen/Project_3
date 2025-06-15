@@ -16,6 +16,7 @@ retrofit = "2.9.0"
 gson = "2.9.0"
 picasso = "2.71828"
 firebase-firestore = "25.1.4"
+foundationAndroid = "1.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,7 @@ google-auth = { module = "com.google.android.gms:play-services-auth", version = 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

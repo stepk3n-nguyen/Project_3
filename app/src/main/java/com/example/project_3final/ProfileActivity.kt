@@ -6,15 +6,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView;
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var tvProfileName: TextView
@@ -26,6 +30,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvName: TextView
     private lateinit var btnUpdateName: ImageButton
     private lateinit var auth: FirebaseAuth
+    //don hang
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: OrderAdapter
+    private val orderList = mutableListOf<Order>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,13 +101,6 @@ class ProfileActivity : AppCompatActivity() {
             dialog.show()
         }
 
-//        btnProfile = findViewById(R.id.imgProfile)
-//        btnProfile.setOnClickListener{
-//            val intent = Intent(this, ProfileActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-
         btnUpdateName = findViewById(R.id.imgEdit)
         btnUpdateName.setOnClickListener{
             val dialogView = layoutInflater.inflate(R.layout.layout_dialog_editname, null)
@@ -132,5 +133,39 @@ class ProfileActivity : AppCompatActivity() {
             }
             dialog.show()
         }
+
+        //don hang
+        recyclerView = findViewById(R.id.recyclerViewOrders)
+        recyclerView.layoutManager = GridLayoutManager(this, 1)
+        adapter = OrderAdapter(orderList)
+        recyclerView.adapter = adapter
+
+        fetchOrders()
+    }
+
+    private fun fetchOrders() {
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        FirebaseFirestore.getInstance()
+            .collection("orders")
+            .whereEqualTo("userId", currentUserId)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                orderList.clear()
+                for (doc in result) {
+                    val order = doc.toObject(Order::class.java)
+                    orderList.add(order)
+                }
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Lỗi khi tải đơn hàng", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, ProductListActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

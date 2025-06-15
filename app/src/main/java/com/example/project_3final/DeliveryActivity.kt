@@ -164,16 +164,18 @@ class DeliveryActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     // Dữ liệu đơn hàng
                     val name = snapshot.getValue(String::class.java)
-                    Log.d("SNAPSHOT_DATA", snapshot.value.toString())
+                    val phone = edPhoneNumber.text.toString().replace("\\s".toRegex(), "").trim()
                     val order = Order(
                         userId = uid,
                         customerName = "$name",
+                        customerPhoneNumber = phone,
                         address = "${spinnerCity.selectedItem}, ${spinnerDistrict.selectedItem}, ${spinnerWard.selectedItem}",
                         totalPrice = totalPrice,
                         items = orderItems
                     )
                     Log.d("ORDER", order.userId)
                     Log.d("ORDER", order.customerName)
+                    Log.d("ORDER", order.customerPhoneNumber)
                     Log.d("ORDER", order.address)
                     Log.d("ORDER", order.totalPrice.toString())
                     Log.d("ORDER", order.items.toString())

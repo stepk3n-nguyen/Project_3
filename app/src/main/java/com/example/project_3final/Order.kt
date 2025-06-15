@@ -9,6 +9,7 @@ data class OrderItem(
 data class Order(
     val userId: String = "",
     val customerName: String = "",
+    val customerPhoneNumber: String = "",
     val address: String = "",
     val totalPrice: Int = 0,
     val timestamp: Long = System.currentTimeMillis(),
