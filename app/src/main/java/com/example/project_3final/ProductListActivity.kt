@@ -108,31 +108,30 @@ class ProductListActivity : AppCompatActivity() {
     // load ds sp tu Firestore vaf map imageName sang anh trong drawable
     private fun fetchProductsFromFirestore() {
         val db = FirebaseFirestore.getInstance()
-        db.collection("products").get()
-            .addOnSuccessListener { result ->
-                val products = mutableListOf<Product>()
-                for (document in result) {
-                    val name = document.getString("name") ?: ""
-                    val price = document.getLong("price")?.toInt() ?: 0
-                    val imageName = document.getString("imageName") ?: ""
-                    val product = Product(
-                        id = document.id,
-                        name = name,
-                        price = price,
-                        imageName = imageName
-                    )
-                    products.add(product)
-                }
-
-                // Map imageName thành R.drawable.id
-                productList = products.map {
-                    it.copy(imageResId = getDrawableIdByName(it.imageName))
-                }
-
-                filteredList = productList.toMutableList()
-                adapter = ProductAdapter(filteredList)
-                findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
+        db.collection("products").get().addOnSuccessListener { result ->
+            val products = mutableListOf<Product>()
+            for (document in result) {
+                val name = document.getString("name") ?: ""
+                val price = document.getLong("price")?.toInt() ?: 0
+                val imageName = document.getString("imageName") ?: ""
+                val product = Product(
+                    id = document.id,
+                    name = name,
+                    price = price,
+                    imageName = imageName
+                )
+                products.add(product)
             }
+
+            // Map imageName thành R.drawable.id
+            productList = products.map {
+                it.copy(imageResId = getDrawableIdByName(it.imageName))
+            }
+
+            filteredList = productList.toMutableList()
+            adapter = ProductAdapter(filteredList)
+            findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
+        }
     }
 
     //lay resource id

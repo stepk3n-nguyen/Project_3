@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 //import retrofit2.Callback
 //import retrofit2.Call
@@ -34,15 +35,15 @@ class DeliveryActivity : AppCompatActivity() {
     private lateinit var edRecipientName : EditText
     private lateinit var edPhoneNumber : EditText
     private lateinit var tvQRPrice : TextView
+    private var totalPrice = CartManager.getTotalPrice()
     private lateinit var btnConfirm : Button
     private lateinit var btnBack : TextView
     private lateinit var spinnerCity : Spinner
     private lateinit var spinnerDistrict : Spinner
     private lateinit var spinnerWard : Spinner
-//    private lateinit var vietQRApi: VietQRApi
     private lateinit var imgVietQR : ImageView
     private lateinit var auth : FirebaseAuth
-
+    private lateinit var cartItems : CartManager
     private val locationData = mapOf(
         "Hà Nội" to mapOf(
             "Cầu Giấy" to listOf("Dịch Vọng", "Yên Hòa"),
@@ -56,10 +57,9 @@ class DeliveryActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_delivery)
         binding = ActivityDeliveryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        cartItems = CartManager
         edRecipientName = binding.edRecipientName
         edPhoneNumber = binding.edPhoneNumber
         spinnerCity = binding.spnCity
@@ -67,10 +67,10 @@ class DeliveryActivity : AppCompatActivity() {
         spinnerWard = binding.spnWard
         imgVietQR = binding.imgVietQR
         auth = FirebaseAuth.getInstance()
+
         setupCitySpinner()
 
         //total price format----------------------------------------//
-        val totalPrice = CartManager.getTotalPrice()
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
         tvQRPrice = binding.tvQRPrice
         tvQRPrice.text = "Số tiền: ${formattedPrice}₫"
@@ -84,6 +84,7 @@ class DeliveryActivity : AppCompatActivity() {
                 edPhoneNumber.error = "Vui lòng nhập số điện thoại"
             } else if (phone.matches(phonePattern)) {
                 Toast.makeText(this, "Đặt hàng thành công! Tổng tiền: ${formattedPrice}₫", Toast.LENGTH_LONG).show()
+                placeOrder()
                 CartManager.clearCart()
                 val intent = Intent(this, ProductListActivity::class.java)
                 startActivity(intent)
@@ -122,14 +123,6 @@ class DeliveryActivity : AppCompatActivity() {
         //tạo QR code thanh toan------------------------------------------------//
         val qrUrl = "https://img.vietqr.io/image/970422-9566917032003-compact.png?amount=${totalPrice}&addInfo=thanh%20toan%20don%20hang%20Temu&accountName=NGUYEN%20ANH%20TUAN"
         Picasso.get().load(qrUrl).into(binding.imgVietQR)
-
-        // Tạo Retrofit client------------------------------------------------//
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl("https://api.vietqr.io/v2/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        vietQRApi = retrofit.create(VietQRApi::class.java)
-//        generateQRCode()
     }
 
     private fun setupCitySpinner() {
@@ -153,41 +146,69 @@ class DeliveryActivity : AppCompatActivity() {
         }
     }
 
-//    private fun generateQRCode() {
-//        val totalPrice = CartManager.getTotalPrice()
-//        val binding = ActivityDeliveryBinding.inflate(layoutInflater)
-//        val request = VietQRRequest(
-//            accountNo = "9566917032003",
-//            accountName = "NGUYEN ANH TUAN",
-//            acqId = "970422",
-//            amount = totalPrice,
-//            addInfo = "Thanh toan don hang Temu"
+    private fun placeOrder() {
+        Log.d("CALL ORDER","ĐÃ GỌI HÀM ORDER")
+        val db = FirebaseFirestore.getInstance()
+        val ordersCollection = db.collection("orders")
+        Log.d("FIREBASE","Da tao orders")
+        val orderItems = cartItems.getCartList().map {
+            OrderItem(name = it.name, price = it.price, quantity = it.quantity)
+        }
+        Log.d("FIREBASE","Da map sang orderItem")
+        val database = FirebaseDatabase.getInstance("https://project-3-1ed87-default-rtdb.asia-southeast1.firebasedatabase.app")
+        val uid = auth.currentUser?.uid
+        Log.d("GG AUTH","$uid")
+        if (uid != null) {
+            val userRef = database.getReference("users").child(uid)
+            userRef.child("displayName").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    // Dữ liệu đơn hàng
+                    val name = snapshot.getValue(String::class.java)
+                    Log.d("SNAPSHOT_DATA", snapshot.value.toString())
+                    val order = Order(
+                        userId = uid,
+                        customerName = "$name",
+                        address = "${spinnerCity.selectedItem}, ${spinnerDistrict.selectedItem}, ${spinnerWard.selectedItem}",
+                        totalPrice = totalPrice,
+                        items = orderItems
+                    )
+                    Log.d("ORDER", order.userId)
+                    Log.d("ORDER", order.customerName)
+                    Log.d("ORDER", order.address)
+                    Log.d("ORDER", order.totalPrice.toString())
+                    Log.d("ORDER", order.items.toString())
+
+                    ordersCollection.add(order)
+                        .addOnSuccessListener {
+                            Log.d("ORDER COLLECTION", "Tao order thanh cong")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("ORDER COLLECTION", "Lỗi tạo order: ${e.message}", e)
+                            Toast.makeText(this@DeliveryActivity, "Lỗi khi tạo đơn hàng: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@DeliveryActivity,"Lỗi khi tải tên: ${error.message}",Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+//        val order = Order(
+//            userId = FirebaseAuth.getInstance().currentUser?.uid ?: "unknown",
+//            address = "$spinnerCity, $spinnerDistrict, $spinnerWard",
+//            totalPrice = totalPrice,
+//            items = orderItems
 //        )
 //
-//        vietQRApi.generateQR(request).enqueue(object : Callback<VietQRResponse> {
-//            override fun onResponse(call: Call<VietQRResponse>, response: Response<VietQRResponse>) {
-//                if (response.isSuccessful) {
-////                    val qrUrl = response.body()?.data?.qrDataURL
-//                    val qrUrl = "https://img.vietqr.io/image/970422-9566917032003-compact2.png?amount=${totalPrice}&addInfo=thanh%20toan%20don%20hang%20Temu&accountName=NGUYEN%20ANH%20TUAN"
-//                    if (qrUrl != null) {
-//                        Picasso.get().load(qrUrl).into(binding.imgVietQR)
-//                        val gson = Gson()
-//                        val json = gson.toJson(response.body())
-////                        Log.d("API_JSON", json)
-//                        Log.d("DEBUG_QR", "QR URL: $qrUrl")
-////                        Log.d("API_RESPONSE", response.body().toString())
-//                    }
-//                } else {
-//                    Toast.makeText(this@DeliveryActivity, "Lỗi: ${response.code()}", Toast.LENGTH_SHORT).show()
-//                    Log.d("DEBUG_QR", "Lỗi QR")
-//                }
+//        ordersCollection.add(order)
+//            .addOnSuccessListener {
+//                Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show()
+//                Log.d("ORDER","Tao order thanh cong")
 //            }
-//
-//            override fun onFailure(call: Call<VietQRResponse>, t: Throwable) {
-//                Toast.makeText(this@DeliveryActivity, "Lỗi kết nối: ${t.message}", Toast.LENGTH_SHORT).show()
-//                Log.d("DEBUG_QR", "Lỗi kết nối QR")
+//            .addOnFailureListener {
+//                Toast.makeText(this, "Lỗi khi đặt hàng: ${it.message}", Toast.LENGTH_SHORT).show()
+//                Log.d("ORDER","Tao order that bai")
 //            }
-//        })
-//    }
+    }
 }
 
