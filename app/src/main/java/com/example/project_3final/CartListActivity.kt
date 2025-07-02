@@ -39,6 +39,7 @@ class CartListActivity : AppCompatActivity() {
         val imgEmptyCart: ImageView = findViewById(R.id.imgEmptyCart)
         //------------Sơ cua-------------------
         val emptyCart: LinearLayout = findViewById(R.id.emptyCart)
+
         if (cartItems.isEmpty()) {
             recyclerView.visibility = View.GONE
             emptyCart.visibility = View.VISIBLE
@@ -59,12 +60,6 @@ class CartListActivity : AppCompatActivity() {
                 val intent = Intent(this,DeliveryActivity::class.java)
                 startActivity(intent)
                 finish()
-//                val totalPrice = CartManager.getTotalPrice()
-//                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
-//                Toast.makeText(this, "Thanh toán thành công! Tổng tiền: ${formattedPrice}₫", Toast.LENGTH_LONG).show()
-//                CartManager.clearCart()
-//                recyclerView.adapter = CartAdapter(emptyList(), onCartChanged = {recreate()})
-//                txtTotalPrice.text = "Tổng cộng: 0₫"
             }
         }
 

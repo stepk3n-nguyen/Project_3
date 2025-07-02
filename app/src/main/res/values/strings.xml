@@ -78,4 +78,7 @@
     <string name="thongTinChuyenKhoan">Thông tin chuyển khoản</string>
     <string name="nguoiThuHuongNguyenAnhTuan">Người thụ hưởng: Nguyễn Anh Tuấn</string>
     <string name="donHang">Đơn hàng</string>
+    <string name="quanLySanPham">Quản lý sản phẩm</string>
+    <string name="quanLyDonHang">Quản lý đơn hàng</string>
+    <string name="quanLy">Quản lý</string>
 </resources>

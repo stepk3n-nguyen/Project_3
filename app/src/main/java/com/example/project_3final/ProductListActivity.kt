@@ -24,6 +24,7 @@ class ProductListActivity : AppCompatActivity() {
         val btnViewCart: ImageButton = findViewById(R.id.btnViewCart)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         val btnProfile: ImageButton = findViewById(R.id.imgProfile)
+
         productList = listOf(
             Product(name="Dây mạng cat5e UTP Lention Lan-5E05 dài 5M", price = 270000, imageName = "day_mang_cat5e_utp_lention_lan_5e05_dai_5m"),
             Product(name="USB to 3.5mm Jack Audio Adapter", price=90000, imageName = "usb_to_jack_3_5mm"),
@@ -63,7 +64,6 @@ class ProductListActivity : AppCompatActivity() {
         filteredList = productList.toMutableList()
         adapter = ProductAdapter(filteredList)
 
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = adapter
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}

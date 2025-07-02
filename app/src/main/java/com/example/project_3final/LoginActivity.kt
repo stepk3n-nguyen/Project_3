@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton
 import android.widget.TextView;
 import android.widget.Toast
-import androidx.activity.result.IntentSenderRequest
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -60,8 +58,10 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            } else if (email == "admin" && password == "admin"){
+                startActivity(Intent(this, ManageActivity::class.java))
+                finish()
             }
-
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 task ->
                     if (task.isSuccessful) {

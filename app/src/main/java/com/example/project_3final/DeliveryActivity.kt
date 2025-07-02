@@ -21,10 +21,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 //import retrofit2.Callback
 //import retrofit2.Call
 //import retrofit2.Response
-//import retrofit2.Retrofit
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 //import retrofit2.converter.gson.GsonConverterFactory
 import java.text.NumberFormat
 import java.util.Locale
@@ -38,22 +43,14 @@ class DeliveryActivity : AppCompatActivity() {
     private var totalPrice = CartManager.getTotalPrice()
     private lateinit var btnConfirm : Button
     private lateinit var btnBack : TextView
-    private lateinit var spinnerCity : Spinner
+    private lateinit var spnProvince : Spinner
     private lateinit var spinnerDistrict : Spinner
     private lateinit var spinnerWard : Spinner
     private lateinit var imgVietQR : ImageView
     private lateinit var auth : FirebaseAuth
     private lateinit var cartItems : CartManager
-    private val locationData = mapOf(
-        "Hà Nội" to mapOf(
-            "Cầu Giấy" to listOf("Dịch Vọng", "Yên Hòa"),
-            "Hoàn Kiếm" to listOf("Hàng Bạc", "Hàng Buồm")
-        ),
-        "Hồ Chí Minh" to mapOf(
-            "Quận 1" to listOf("Bến Nghé", "Bến Thành"),
-            "Quận 3" to listOf("Phường 6", "Phường 7")
-        )
-    )
+
+    private lateinit var vnApi: VnApi //spinner
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +59,13 @@ class DeliveryActivity : AppCompatActivity() {
         cartItems = CartManager
         edRecipientName = binding.edRecipientName
         edPhoneNumber = binding.edPhoneNumber
-        spinnerCity = binding.spnCity
+        spnProvince = binding.spnProvince
         spinnerDistrict = binding.spnDistrict
         spinnerWard = binding.spnWard
         imgVietQR = binding.imgVietQR
         auth = FirebaseAuth.getInstance()
 
-        setupCitySpinner()
+//        setupCitySpinner()
 
         //total price format----------------------------------------//
         val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN")).format(totalPrice)
@@ -123,27 +120,63 @@ class DeliveryActivity : AppCompatActivity() {
         //tạo QR code thanh toan------------------------------------------------//
         val qrUrl = "https://img.vietqr.io/image/970422-9566917032003-compact.png?amount=${totalPrice}&addInfo=thanh%20toan%20don%20hang%20Temu&accountName=NGUYEN%20ANH%20TUAN"
         Picasso.get().load(qrUrl).into(binding.imgVietQR)
-    }
 
-    private fun setupCitySpinner() {
-        val cities = locationData.keys.toList()
-        spinnerCity.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, cities)
-        spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedCity = cities[position]
-                val districts = locationData[selectedCity]?.keys?.toList() ?: emptyList()
-                    spinnerDistrict.adapter = ArrayAdapter(this@DeliveryActivity, android.R.layout.simple_spinner_dropdown_item, districts)
-                    spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                            val selectedDistrict = districts[pos]
-                            val wards = locationData[selectedCity]?.get(selectedDistrict) ?: emptyList()
-                            spinnerWard.adapter = ArrayAdapter(this@DeliveryActivity, android.R.layout.simple_spinner_dropdown_item, wards)
-                        }
-                    override fun onNothingSelected(parent: AdapterView<*>) {}
+        // Spinner------------------------------------------------//
+        vnApi = Retrofit.Builder()
+            .baseUrl("https://provinces.open-api.vn/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(VnApi::class.java)
+
+        loadProvinces()
+        // Spinner------------------------------------------------//
+    }
+    private fun loadProvinces() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val provinces = vnApi.getProvinces()
+            withContext(Dispatchers.Main) {
+                val adapter = ArrayAdapter(this@DeliveryActivity, android.R.layout.simple_spinner_item, provinces.map { it.name })
+                Log.d("DeliveryActivity", "Wards loaded: ${provinces.map { it.name }}")
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spnProvince.adapter = adapter
+
+                spnProvince.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        val selected = provinces[position]
+                        loadDistricts(selected.code)
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
             }
-            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
+
+    private fun loadDistricts(provinceCode: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val provinceDetail = vnApi.getProvinceDetails(provinceCode)
+            val districts = provinceDetail.districts
+            withContext(Dispatchers.Main) {
+                val adapter = ArrayAdapter(this@DeliveryActivity, android.R.layout.simple_spinner_item, districts.map { it.name })
+                Log.d("DeliveryActivity", "Wards loaded: ${districts.map { it.name }}")
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerDistrict.adapter = adapter
+
+                spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        val selected = districts[position]
+                        loadWards(selected.wards)
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
+            }
+        }
+    }
+
+    private fun loadWards(wards: List<Ward>) {
+        val adapter = ArrayAdapter(this@DeliveryActivity,android.R.layout.simple_spinner_item,wards.map { it.name })
+        Log.d("DeliveryActivity", "Wards loaded: ${wards.map { it.name }}")
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerWard.adapter = adapter
     }
 
     private fun placeOrder() {
@@ -169,16 +202,10 @@ class DeliveryActivity : AppCompatActivity() {
                         userId = uid,
                         customerName = "$name",
                         customerPhoneNumber = phone,
-                        address = "${spinnerCity.selectedItem}, ${spinnerDistrict.selectedItem}, ${spinnerWard.selectedItem}",
+                        address = "${spnProvince.selectedItem}, ${spinnerDistrict.selectedItem}, ${spinnerWard.selectedItem}",
                         totalPrice = totalPrice,
                         items = orderItems
                     )
-                    Log.d("ORDER", order.userId)
-                    Log.d("ORDER", order.customerName)
-                    Log.d("ORDER", order.customerPhoneNumber)
-                    Log.d("ORDER", order.address)
-                    Log.d("ORDER", order.totalPrice.toString())
-                    Log.d("ORDER", order.items.toString())
 
                     ordersCollection.add(order)
                         .addOnSuccessListener {
